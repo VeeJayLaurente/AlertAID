@@ -15,15 +15,15 @@ AlertAID Mobile App.
 * Healthcare & First Responders – Receive real-time incident reports for faster medical response.  
 
 # Course Overview
-* Building with React & Vite – Creating fast and responsive UI components.  
+* Building with React Native & Expo – Creating fast and responsive UI components.  
 * Database & API Integration – Managing user data, emergency contacts, and reports.  
 * User Authentication – Secure login and user profile management.  
 * Deployment & Hosting – Deploying the app using **EAS Hosting** for real-world use. 
 
 # Tech Stack
 * React Native | React.JS
-* Firebase 
-* HTML, CSS and JS
+* Firebase | Expo
+* HTML | CSS | NativeWind
 
 # Onboarding Screen
 <img src="assets/images/Onboarding.png">  
