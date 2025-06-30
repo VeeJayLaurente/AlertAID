@@ -10,8 +10,6 @@ export default function App() {
 <View style={{ position: 'absolute', width: 400, height: 400, borderRadius: 400, borderWidth: 40, borderColor: 'rgba(255, 255, 255, 0.7)', bottom: -100, right: -250 }} />
       
       {/* Logo Placeholder - Replace with your actual image */}
-
-      {/* Logo Placeholder - Replace with your actual image */}
       <Image source={require('../assets/images/Logo.png')} style={{ width: 150, height: 150, marginBottom: 16 }} />
       
       {/* App Title */}

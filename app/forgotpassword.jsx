@@ -1,10 +1,21 @@
-import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Image} from 'react-native';
 import React from 'react';
 import {Link} from 'expo-router'
 
 const ForgotPasswordScreen = () => {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#FF0000', paddingHorizontal: 24 }}>
+       
+       <Image
+              source={require("../assets/images/Logo.png")}
+              style={{
+                width: 120,
+                height: 120,
+                alignSelf: "center",
+                marginBottom: 30,
+              }}
+            />
+
       {/* Title */}
       <Text style={{ color: 'white', fontSize: 30, fontWeight: 'bold', marginBottom: 16 }}>Forgot Password</Text>
       
