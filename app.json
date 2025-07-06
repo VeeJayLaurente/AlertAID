@@ -2,7 +2,7 @@
   "expo": {
     "name": "AlertAID",
     "slug": "AlertAID",
-    "scheme":"alertaid",
+    "scheme": "alertaid",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -24,16 +24,15 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-
     "expo": {
-  "permissions": [
-    "ACCESS_FINE_LOCATION",
-    "ACCESS_COARSE_LOCATION"
-  ]
-}
-,
+      "permissions": [
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION"
+      ]
+    },
     "plugins": [
-      "expo-router"
+      "expo-router",
+      "expo-audio"
     ]
   }
 }
