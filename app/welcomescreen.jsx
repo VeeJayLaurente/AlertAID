@@ -20,7 +20,7 @@ export default function WelcomeScreen() {
       <View style={{ position: 'absolute', width: 400, height: 400, borderRadius: 400, borderWidth: 40, borderColor: 'rgba(255, 255, 255, 0.7)', bottom: -100, right: -250 }} />
       
       {/* Decorative Element */}
-      <Image source={require('../assets/images/decor-top.png')} style={{ position: 'absolute', top: 20, left: 0, width: 200, height: 200 }} />
+      <Image source={require('../assets/images/decor-top.png')} style={{ position: 'absolute', top: -2, left: 0, width: 200, height: 200 }} />
       
       {/* App Logo */}
       <Image source={require('../assets/images/Logo.png')} style={{ width: 150, height: 150, marginBottom: 16 }} />

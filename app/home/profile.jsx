@@ -6,17 +6,17 @@ const ProfileScreen = () => {
   const router = useRouter();
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView contentContainerStyle={styles.scrollContainer}>
       {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity onPress={() => router.back()}>
-          <Image source={require('../../assets/images/Arrow.png')} style={styles.icon} />
+          <Image source={require('../../assets/images/Back Arrow.png')} style={styles.icon} />
         </TouchableOpacity>
 
         <Image source={require('../../assets/images/Logo.png')} style={styles.logo} />
 
         <TouchableOpacity>
-          <Image source={require('../../assets/images/Settings.png')} style={styles.icon} />
+          <Image source={require('../../assets/images/Settings.png')} resizeMode="contain" style={styles.icon} />
         </TouchableOpacity>
       </View>
 
@@ -25,7 +25,7 @@ const ProfileScreen = () => {
 
       {/* Profile Image */}
       <Image
-        source={require('../../assets/images/profile.png')} // Replace with actual image or dynamic logic
+        source={require('../../assets/images/Male User.png')} // Replace with actual image or dynamic logic
         style={styles.profileImage}
       />
 
@@ -69,9 +69,8 @@ const ProfileScreen = () => {
 export default ProfileScreen;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#FFF',
+  scrollContainer: {
+    paddingBottom: 80
   },
   header: {
     flexDirection: 'row',
@@ -90,8 +89,8 @@ const styles = StyleSheet.create({
     tintColor: 'white',
   },
   icon: {
-    width: 28,
-    height: 28,
+    width: 40,
+    height: 40,
     tintColor: 'white',
   },
   welcomeText: {

@@ -1,57 +1,55 @@
-import { Audio } from 'expo-av';
-import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { useState } from 'react';
+import { View, StyleSheet, TouchableOpacity, Image, Text } from 'react-native';
+import { useAudioPlayer } from 'expo-audio';
 
-const AlertScreen = () => {
-  const [sound, setSound] = useState(null);
+const audioSource = require('../../assets/sounds/alert.mp3');
+
+export default function AlertScreen() {
+  const player = useAudioPlayer(audioSource);
   const [isPlaying, setIsPlaying] = useState(false);
 
-  const toggleAlert = async () => {
+  const handleToggle = async () => {
     try {
-      if (isPlaying && sound) {
-        await sound.stopAsync();
-        setIsPlaying(false);
+      if (isPlaying) {
+        await player.pause();
       } else {
-        const { sound: newSound } = await Audio.Sound.createAsync(
-          require('../../assets/sounds/alert.mp3') // Make sure the path is correct
-        );
-        setSound(newSound);
-        await newSound.playAsync();
-        setIsPlaying(true);
+        await player.play();
       }
+      setIsPlaying(!isPlaying);
     } catch (error) {
-      console.log('Error with sound playback:', error);
+      console.error('Error toggling audio:', error);
     }
   };
-
-  useEffect(() => {
-    return sound
-      ? () => {
-          sound.unloadAsync();
-        }
-      : undefined;
-  }, [sound]);
 
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.settings}>
-        <Image source={require('../../assets/images/Settings.png')} style={{ width: 30, height: 30 }} />
+        <Image
+          source={require('../../assets/images/Settings.png')}
+          resizeMode="contain"
+          style={{ width: 40, height: 40 }}
+        />
       </TouchableOpacity>
 
-      <Text style={styles.header}>PRESS TO RELEASE{'\n'}AN ALERT SIGNAL</Text>
+      <Text style={styles.header}>
+        PRESS TO TOGGLE{'\n'}ALERT SIGNAL
+      </Text>
 
-      <TouchableOpacity onPress={toggleAlert} style={styles.alertButton}>
+      <TouchableOpacity onPress={handleToggle} style={styles.alertButton}>
         <View style={styles.circleOuter}>
           <View style={styles.circleMiddle}>
             <View style={styles.circleInner}>
-              <Image source={require('../../assets/images/Logo.png')} style={{ width: 30, height: 30, tintColor: '#FF0000' }} />
+              <Image
+                source={require('../../assets/images/Logo.png')}
+                style={{ width: 30, height: 30, tintColor: '#FF0000' }}
+              />
             </View>
           </View>
         </View>
       </TouchableOpacity>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -64,7 +62,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 60,
     right: 20,
-    zIndex: 10,
   },
   header: {
     textAlign: 'center',
@@ -102,5 +99,3 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
-
-export default AlertScreen;

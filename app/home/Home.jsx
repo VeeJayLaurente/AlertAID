@@ -65,19 +65,6 @@ const HomeScreen = () => {
           </View>
         </View>
       </ScrollView>
-
-      {/* Bottom Navigation Bar */}
-      <View style={styles.navbar}>
-        <TouchableOpacity>
-          <Image source={require('../../assets/images/Home.png')} style={styles.navIcon} />
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Image source={require('../../assets/images/Bell.png')} style={styles.navIcon} />
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Image source={require('../../assets/images/Alert.png')} style={styles.navIcon} />
-        </TouchableOpacity>
-      </View>
     </View>
   );
 };

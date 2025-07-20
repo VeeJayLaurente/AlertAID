@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context';
 import React from 'react'
 import { Slot, Stack } from 'expo-router'
 import { useFonts} from 'expo-font'
@@ -32,7 +32,7 @@ const MainLayout = () => {
   }
   
   return (
-    // <Slot></Slot>
+    <SafeAreaView edges={['bottom']} style={{ flex: 1, backgroundColor: '#000' }}>
     <Stack>
 
       <Stack.Screen name="index" options={{
@@ -64,6 +64,7 @@ const MainLayout = () => {
                   }}/>
 
     </Stack>
+  </SafeAreaView>
   )
 }
 
