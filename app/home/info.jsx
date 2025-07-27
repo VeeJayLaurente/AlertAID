@@ -74,8 +74,8 @@ const InformationScreen = () => {
                 <Image
                   source={
                     bookmarked[id]
-                      ? require('../../assets/images/Bookmark.png')
-                      : require('../../assets/images/Bookmark.png')
+                      ? require('../../assets/images/Bell.png')
+                      : require('../../assets/images/Bell.png')
                   }
                   style={styles.actionIcon}
                 />

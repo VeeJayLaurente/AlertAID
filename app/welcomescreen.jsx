@@ -52,7 +52,7 @@ export default function WelcomeScreen() {
       </View>
 
       {/* White Line (Road) */}
-      <View style={{ position: 'absolute', bottom: 0, width: '200%', height: 30, left: 1, backgroundColor: 'white' }} />
+      {/* <View style={{ position: 'absolute', bottom: 0, width: '200%', height: 30, left: 1, backgroundColor: 'white' }} /> */}
       
       <StatusBar style="light" />
     </View>

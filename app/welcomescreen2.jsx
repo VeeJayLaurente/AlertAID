@@ -34,7 +34,7 @@ const WelcomeScreen2 = () => {
       </TouchableOpacity>
       
       {/* White Line */}
-      <View style={{ position: 'absolute', bottom: 0, width: '200%', height: 30, backgroundColor: 'white' }} />
+      {/* <View style={{ position: 'absolute', bottom: 0, width: '200%', height: 30, backgroundColor: 'white' }} /> */}
     </View>
   );
 };

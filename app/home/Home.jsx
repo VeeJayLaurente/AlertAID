@@ -21,25 +21,41 @@ const HomeScreen = () => {
       </View>
 
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 100 }}>
-        {/* Dashboard */}
-        <View style={styles.dashboard}>
-          <Text style={styles.dashboardTitle}>📊 My Dashboard</Text>
-          <View style={styles.statsRow}>
-            <View style={styles.statCard}>
-              <Text style={styles.statNumber}>7</Text>
-              <Text style={styles.statLabel}>Crises Avoided</Text>
-            </View>
-            <View style={styles.statCard}>
-              <Text style={styles.statNumber}>10</Text>
-              <Text style={styles.statLabel}>Alerts</Text>
-            </View>
-            <View style={styles.statCard}>
-              <Text style={styles.statNumber}>3</Text>
-              <Text style={styles.statLabel}>Articles Read</Text>
-            </View>
+        {/* Alerts Carousel Section */}
+      <View style={styles.alertsContainer}>
+        <Text style={styles.sectionTitle}>🚨 Latest Alerts & Updates</Text>
+
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.carousel}
+        >
+          <View style={[styles.alertCard, { backgroundColor: '#FFDFDF' }]}>
+            <Text style={styles.alertTitle}>🚨 Heavy Rainfall Warning</Text>
+            <Text style={styles.alertDesc}>Issued by PAGASA for Toledo. Stay indoors and avoid low-lying areas.</Text>
+            <TouchableOpacity style={styles.alertBtn}>
+              <Text style={styles.alertBtnText}>View Details</Text>
+            </TouchableOpacity>
           </View>
-          <Text style={styles.statusText}>✅ Status: <Text style={{ fontWeight: 'bold' }}>Safe</Text></Text>
-        </View>
+
+          <View style={[styles.alertCard, { backgroundColor: '#FFF2CC' }]}>
+            <Text style={styles.alertTitle}>📢 LGU Advisory</Text>
+            <Text style={styles.alertDesc}>Road closure near Toledo bridge from 5pm-8pm due to clearing ops.</Text>
+            <TouchableOpacity style={styles.alertBtn}>
+              <Text style={styles.alertBtnText}>Learn More</Text>
+            </TouchableOpacity>
+          </View>
+
+          <View style={[styles.alertCard, { backgroundColor: '#E0F7FA' }]}>
+            <Text style={styles.alertTitle}>💡 Power Interruption</Text>
+            <Text style={styles.alertDesc}>Scheduled power outage by VECO on July 29, 10am-2pm.</Text>
+            <TouchableOpacity style={styles.alertBtn}>
+              <Text style={styles.alertBtnText}>More Info</Text>
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
+      </View>
+
 
         {/* Safety Articles */}
         <Text style={styles.sectionTitle}>🛡️ Safety Articles</Text>
@@ -74,13 +90,13 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FFF',
     paddingHorizontal: 16,
-    paddingTop: 40,
+    paddingTop: 50,
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 12,
+    marginBottom: 25,
   },
   logo: {
     width: 50,
@@ -92,50 +108,47 @@ const styles = StyleSheet.create({
     height: 30,
     tintColor: '#FF0000',
   },
-  dashboard: {
-    backgroundColor: '#FF0000',
-    borderRadius: 20,
-    padding: 20,
-    marginBottom: 24,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
-  },
-  dashboardTitle: {
-    color: '#FFF',
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginBottom: 16,
-  },
-  statsRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  statCard: {
-    backgroundColor: '#FFF',
-    padding: 12,
-    borderRadius: 16,
-    alignItems: 'center',
-    width: '30%',
-  },
-  statNumber: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    color: '#FF0000',
-  },
-  statLabel: {
-    fontSize: 12,
-    color: '#444',
-    marginTop: 4,
-    textAlign: 'center',
-  },
-  statusText: {
-    color: '#FFF',
-    fontSize: 14,
-    marginTop: 16,
-    textAlign: 'center',
-  },
+alertsContainer: {
+  marginBottom: 30,
+},
+carousel: {
+  gap: 14,
+  paddingVertical: 10,
+},
+alertCard: {
+  width: 250,
+  borderRadius: 16,
+  padding: 16,
+  marginRight: 12,
+  shadowColor: '#000',
+  shadowOffset: { width: 0, height: 2 },
+  shadowOpacity: 0.1,
+  shadowRadius: 4,
+},
+alertTitle: {
+  fontSize: 16,
+  fontWeight: 'bold',
+  color: '#D32F2F',
+  marginBottom: 6,
+},
+alertDesc: {
+  fontSize: 13,
+  color: '#333',
+  marginBottom: 12,
+},
+alertBtn: {
+  alignSelf: 'flex-start',
+  backgroundColor: '#FF0000',
+  paddingVertical: 6,
+  paddingHorizontal: 12,
+  borderRadius: 20,
+},
+alertBtnText: {
+  color: '#FFF',
+  fontSize: 12,
+  fontWeight: 'bold',
+},
+
   sectionTitle: {
     fontSize: 18,
     fontWeight: 'bold',

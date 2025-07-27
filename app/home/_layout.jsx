@@ -5,7 +5,6 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Layout = () => {
   return (
-    <SafeAreaView edges={['bottom']} style={{ flex: 1, backgroundColor: '#000' }}>
       <Tabs
         screenOptions={{
           tabBarShowLabel: false,
@@ -84,7 +83,6 @@ const Layout = () => {
           }}
         />
       </Tabs>
-    </SafeAreaView>
   );
 };
 
