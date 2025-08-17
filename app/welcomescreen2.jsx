@@ -30,7 +30,7 @@ const WelcomeScreen2 = () => {
       
       {/* Next Button */}
       <TouchableOpacity style={{ backgroundColor: 'white', borderRadius: 24, paddingVertical: 12, paddingHorizontal: 24, shadowOpacity: 0.2, shadowRadius: 4, shadowOffset: { width: 0, height: 2 } }}>
-        <Link href ="/login" style={{ color: '#FF0000', fontSize: 20, fontFamily: 'Inter-Bold' }}>Continue</Link>
+        <Link href ="/home/Home" style={{ color: '#FF0000', fontSize: 20, fontFamily: 'Inter-Bold' }}>Continue</Link>
       </TouchableOpacity>
       
       {/* White Line */}

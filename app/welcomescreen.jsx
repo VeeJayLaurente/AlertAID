@@ -42,7 +42,7 @@ export default function WelcomeScreen() {
       {/* Navigation Buttons */}
       <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%', paddingHorizontal: 50, marginBottom: 40 }}>
         <TouchableOpacity>
-          <Link href ="/login" style={{ color: 'white', fontSize: 20, fontFamily: 'Inter-Regular', top: 10 }}>Skip</Link>
+          <Link href ="/home/Home" style={{ color: 'white', fontSize: 20, fontFamily: 'Inter-Regular', top: 10 }}>Skip</Link>
         </TouchableOpacity> 
 
       <TouchableOpacity style={{backgroundColor: 'white', borderRadius: 100, alignItems: 'center', width: 100, height: 50, justifyContent: 'center' }}>
