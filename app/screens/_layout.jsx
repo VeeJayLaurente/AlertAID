@@ -9,6 +9,11 @@ const _layout = () => {
       options = {{headerShown: false}}
       />
 
+      <Stack.Screen 
+      name="settings" 
+      options = {{headerShown: false}}
+      />
+
     </Stack>
   )
 }

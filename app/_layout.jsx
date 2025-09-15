@@ -1,9 +1,11 @@
 import { SafeAreaView } from 'react-native-safe-area-context';
-import React from 'react'
-import { Slot, Stack } from 'expo-router'
+import { I18nextProvider } from "react-i18next";
+import i18n from "../UI/i18n";
+import { Stack } from 'expo-router'
 import { useFonts} from 'expo-font'
 import { useEffect } from 'react'
 import { SplashScreen } from 'expo-router'
+import { AppProvider } from "../UI/AppContext";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -31,7 +33,10 @@ const MainLayout = () => {
   }
   
   return (
+
     <SafeAreaView edges={['bottom']} style={{ flex: 1, backgroundColor: '#000' }}>
+       <I18nextProvider i18n={i18n}>
+        <AppProvider>
     <Stack>
 
       <Stack.Screen name="index" options={{
@@ -67,6 +72,8 @@ const MainLayout = () => {
                   }}/>
 
     </Stack>
+    </AppProvider>
+    </I18nextProvider>
   </SafeAreaView>
   )
 }

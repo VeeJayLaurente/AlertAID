@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Image, StyleSheet, ScrollView, Modal, Pressable } from 'react-native';
+import {Link} from 'expo-router'
+import { useTranslation } from "react-i18next";
+import { useApp } from "../../UI/AppContext";
 
 const HomeScreen = () => {
   const [selectedArticle, setSelectedArticle] = useState(null);
+  const { t } = useTranslation();
+  const { isDarkMode } = useApp();
 
   const articleData = {
     heatwave: {
@@ -74,7 +79,7 @@ const HomeScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: isDarkMode ? "#121212" : "#FFF" }]}>
       {/* Header */}
       <View style={styles.header}>
         <Image
@@ -83,18 +88,20 @@ const HomeScreen = () => {
           resizeMode="contain"
         />
         <TouchableOpacity>
+          <Link href="/screens/settings">
           <Image
             source={require('../../assets/images/Settings.png')}
             style={styles.settingsIcon}
             resizeMode="contain"
           />
+          </Link>
         </TouchableOpacity>
       </View>
 
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 100 }}>
         {/* Alerts Carousel Section */}
         <View style={styles.alertsContainer}>
-          <Text style={styles.sectionTitle}>🚨 Latest Alerts & Updates</Text>
+          <Text style={[styles.sectionTitle, { color: isDarkMode ? "#FFF" : "#000" }]}>🚨 Latest Alerts & Updates</Text>
 
           <ScrollView
             horizontal
@@ -128,7 +135,7 @@ const HomeScreen = () => {
         </View>
 
         {/* Safety Articles */}
-        <Text style={styles.sectionTitle}>🛡️ Safety Articles</Text>
+        <Text style={[styles.sectionTitle, { color: isDarkMode ? "#FFF" : "#000" }]}>🛡️ Safety Articles</Text>
         <View style={styles.articlesContainer}>
           <TouchableOpacity
             style={[styles.articleCard, { backgroundColor: '#E67E22' }]}

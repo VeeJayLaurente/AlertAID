@@ -1,68 +1,50 @@
-import { View, Text, TextInput, TouchableOpacity, Image} from 'react-native';
-import React from 'react';
-import {Link} from 'expo-router'
+import { View, Text, TextInput, TouchableOpacity, Image, Alert } from "react-native";
+import React, { useState } from "react";
+import { Link } from "expo-router";
+import { sendPasswordResetEmail } from "firebase/auth";
+import { auth } from "../firebase/firebaseConfig";
 
 const ForgotPasswordScreen = () => {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#FF0000', paddingHorizontal: 24 }}>
-       
-       <Image
-              source={require("../assets/images/Logo.png")}
-              style={{
-                width: 120,
-                height: 120,
-                alignSelf: "center",
-                marginBottom: 30,
-              }}
-            />
+  const [email, setEmail] = useState("");
 
-      {/* Title */}
-      <Text style={{ color: 'white', fontSize: 30, fontWeight: 'bold', marginBottom: 16 }}>Forgot Password</Text>
-      
-      {/* Description */}
-      <Text style={{ color: 'white', textAlign: 'center', fontSize: 16, marginBottom: 20 }}>
-        Enter your email address and we will send you a link to reset your password.
+  const handleReset = async () => {
+    try {
+      await sendPasswordResetEmail(auth, email);
+      Alert.alert("Success", "Password reset link sent!");
+    } catch (error) {
+      Alert.alert("Error", error.message);
+    }
+  };
+
+  return (
+    <View style={{ flex: 1, alignItems: "center", justifyContent: "center", backgroundColor: "#FF0000", paddingHorizontal: 24 }}>
+      <Image source={require("../assets/images/Logo.png")}
+        style={{ width: 120, height: 120, alignSelf: "center", marginBottom: 30 }}
+      />
+
+      <Text style={{ color: "white", fontSize: 30, fontWeight: "bold", marginBottom: 16 }}>Forgot Password</Text>
+      <Text style={{ color: "white", textAlign: "center", fontSize: 16, marginBottom: 20 }}>
+        Enter your email and we will send you a link to reset your password.
       </Text>
-      
-      {/* Email Input */}
-      <TextInput placeholder="Email" style={styles.input} placeholderTextColor="#FFF"/>
-      
-      {/* Submit Button */}
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Send Reset Link</Text>
+
+      <TextInput
+        placeholder="Email"
+        placeholderTextColor="#FFF"
+        value={email}
+        onChangeText={setEmail}
+        style={{ width: "100%", backgroundColor: "rgba(255, 255, 255, 0.2)", padding: 15, borderRadius: 8, marginBottom: 12, color: "white" }}
+      />
+
+      <TouchableOpacity style={{ backgroundColor: "white", paddingVertical: 12, paddingHorizontal: 24, borderRadius: 24 }}
+        onPress={handleReset}>
+        <Text style={{ color: "#FF0000", fontSize: 18, fontWeight: "bold" }}>Send Reset Link</Text>
       </TouchableOpacity>
-      
-      {/* Back to Login */}
-      <Link href ="/login" style={{ color: 'white', fontSize: 16, marginTop: 20 }}>
-        Remember your password? <Text style={{ fontWeight: 'bold', textDecorationLine: 'underline' }}>Login</Text>
+
+      <Link href="/login" style={{ color: "white", fontSize: 16, marginTop: 20 }}>
+        Remember your password? <Text style={{ fontWeight: "bold", textDecorationLine: "underline" }}>Login</Text>
       </Link>
     </View>
   );
 };
 
 export default ForgotPasswordScreen;
-
-const styles = {
-  input: {
-    width: '100%',
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-    padding: 15,
-    borderRadius: 8,
-    marginBottom: 12,
-    color: 'white',
-  },
-  button: {
-    backgroundColor: 'white',
-    paddingVertical: 12,
-    paddingHorizontal: 24,
-    borderRadius: 24,
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
-    shadowOffset: { width: 0, height: 2 },
-  },
-  buttonText: {
-    color: '#FF0000',
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-};

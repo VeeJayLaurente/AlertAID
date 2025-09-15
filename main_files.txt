@@ -1,0 +1,5 @@
+-rw-r--r-- 1 Administrator 197121   1404 Sep 14 18:50 app.json
+-rw-r--r-- 1 Administrator 197121    142 Aug 12  2024 babel.config.js
+-rw-r--r-- 1 Administrator 197121   1070 Sep 14 19:43 package.json
+-rw-r--r-- 1 Administrator 197121 443395 Sep 14 19:42 package-lock.json
+-rw-r--r-- 1 Administrator 197121    511 Mar 25 17:50 tailwind.config.js

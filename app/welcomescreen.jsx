@@ -26,7 +26,7 @@ export default function WelcomeScreen() {
       <Image source={require('../assets/images/Logo.png')} style={{ width: 150, height: 150, marginBottom: 16 }} />
       
       {/* Welcome Text */}
-      <Text style={{ color: 'white', fontSize: 30, fontFamily: 'Inter-Bold', textAlign: 'center', marginBottom: 8 }}>Welcome to AlertAID</Text>
+      <Text style={{ color: 'white', fontSize: 30, fontWeight: 'bold', textAlign: 'center', marginBottom: 8 }}>Welcome to AlertAID</Text>
       
       {/* Subtitle */}
       <Text style={{ color: 'white', textAlign: 'center', fontSize: 18, fontFamily: 'Inter-Regular', marginBottom: 32 }}>

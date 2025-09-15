@@ -17,7 +17,7 @@ export default function App() {
       
       {/* Subtitle */}
       <Text style={{ color: 'white', textAlign: 'center', fontSize: 20, marginBottom: 32, fontFamily:"Inter-Regular" }}>
-        Fast Hotline and Online Help for Natural Disasters
+        The Pocket Assistant in Emergency Preparedness for Toledo City.
       </Text>
       
       {/* Get Started Button */}
@@ -40,3 +40,13 @@ export default function App() {
     </View>
   );
 }
+
+// import { Text, View } from 'react-native';
+
+// export default function App() {
+//   return (
+//     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+//       <Text>Minimal test</Text>
+//     </View>
+//   );
+// }
