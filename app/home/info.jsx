@@ -4,21 +4,16 @@ import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
 
 const hotlines = [
-  { id: 1, label: 'Civil Security', number: '+9912324143', icon: require('../../assets/images/Security.png') },
-  { id: 2, label: 'PNP Toledo City', number: '+9912323121', icon: require('../../assets/images/Police.png') },
+  { id: 1, label: 'CDRRMO', number: '0956-817-4215', icon: require('../../assets/images/Security.png') },
+  { id: 2, label: 'PNP Toledo City', number: '0915-642-6842', icon: require('../../assets/images/Police.png') },
   { id: 3, label: 'Toledo Hospital', number: '+9978453621', icon: require('../../assets/images/Cross.png') },
-  { id: 4, label: 'BFP Toledo City', number: '+9945271376', icon: require('../../assets/images/BFP.png') },
+  { id: 4, label: 'BFP Toledo City', number: '0966-216-5466', icon: require('../../assets/images/BFP.png') },
   { id: 5, label: 'Toledo City Hall', number: '+9932183443', icon: require('../../assets/images/City Hall.png') },
-  { id: 6, label: 'Philippine Coast Guard', number: '+9932198745', icon: require('../../assets/images/Cross.png') },
+  { id: 6, label: 'Philippine Coast Guard', number: '0906-536-4925', icon: require('../../assets/images/Cross.png') },
   { id: 7, label: 'Toledo City Health', number: '+9923417832', icon: require('../../assets/images/City Health.png') },
-  { id: 8, label: 'Cebeco III', number: '+9987654123', icon: require('../../assets/images/Cebeco.png') },
-  { id: 9, label: 'Toledo City Swat Force', number: '+9973412211', icon: require('../../assets/images/Swat.png') },
-  { id: 10, label: 'City Management Office', number: '+9967891234', icon: require('../../assets/images/Management.png') },
-  { id: 11, label: 'Public Information Office', number: '+9912312312', icon: require('../../assets/images/PIO.png') },
-  { id: 12, label: 'City Treasurer\'s Office', number: '+9954321123', icon: require('../../assets/images/Treasurer.png') },
-  { id: 13, label: 'CENRO', number: '+9943217788', icon: require('../../assets/images/Cenro.png') },
-  { id: 14, label: 'DSWD', number: '+9932145789', icon: require('../../assets/images/DSWD.png') },
-  { id: 15, label: 'Department of Education', number: '+9923478901', icon: require('../../assets/images/Education.png') },
+  { id: 8, label: 'Cebeco III', number: '0917-624-4406', icon: require('../../assets/images/Cebeco.png') },
+  { id: 9, label: 'CENRO', number: '+9943217788', icon: require('../../assets/images/Cenro.png') },
+  { id: 10, label: 'DSWD', number: '+9932145789', icon: require('../../assets/images/DSWD.png') },
 ];
 
 const InformationScreen = () => {

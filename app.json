@@ -5,7 +5,7 @@
     "scheme": "alertaid",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/AlertAID Logo.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
@@ -17,7 +17,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/AlertAID Logo.png",
         "backgroundColor": "#ffffff"
       },
       "permissions": [
@@ -26,8 +26,12 @@
         "android.permission.ACCESS_FINE_LOCATION",
         "android.permission.ACCESS_COARSE_LOCATION"
       ],
-      "package": "com.veej.AlertAID",
-      "debug": true
+       "package": "com.veej.AlertAID",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyCxg93pEXvE4pmQO4ohQ_RE7PCFBtXL1UQ"
+        }
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -39,21 +43,17 @@
         {
           "microphonePermission": "Allow AlertAID to access your microphone for audio features."
         }
-      ]
+      ],
+      "expo-web-browser"
     ],
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "packagerOpts": {
-      "dev": true,
-      "inlineSourceMap": true,
-      "sourceExts": ["js", "jsx", "ts", "tsx", "mjs"]
-    },
-    "developmentClient": true,
-    "debug": true,
-    "env": {
-      "EXPO_DEBUG": "true",
-      "EXPO_DEV": "true"
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "e50bb62c-39db-4b9a-94a3-fe374526556b"
+      }
     }
   }
 }

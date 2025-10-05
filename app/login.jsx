@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, Image, Alert } from "react-native";
 import { Link, useRouter } from "expo-router";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase/firebaseConfig";
+import { auth, db } from "../firebase/firebaseConfig";
+import { doc, getDoc } from "firebase/firestore";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -11,9 +12,19 @@ const Login = () => {
 
   const handleLogin = async () => {
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      // Fetch user info from Firestore
+      const docRef = doc(db, "users", user.uid);
+      const userSnap = await getDoc(docRef);
+
+      if (userSnap.exists()) {
+        console.log("User Data:", userSnap.data());
+      }
+
       Alert.alert("Success", "Logged in successfully!");
-      router.push("/home/Home"); // ✅ Redirect after login
+      router.push("/home/Home");
     } catch (error) {
       Alert.alert("Login Error", error.message);
     }
@@ -27,13 +38,11 @@ const Login = () => {
       paddingTop: 20,
       justifyContent: "center",
     }}>
-      {/* Logo */}
       <Image
         source={require("../assets/images/Logo.png")}
         style={{ width: 120, height: 120, alignSelf: "center", marginBottom: 30 }}
       />
 
-      {/* Title */}
       <Text style={{
         fontSize: 28,
         fontWeight: "bold",
@@ -44,8 +53,6 @@ const Login = () => {
         Sign in on AlertAID
       </Text>
 
-      {/* Email */}
-      <Text style={{ color: "#FFF", fontSize: 16, marginBottom: 6 }}>Email</Text>
       <TextInput
         placeholder="Enter your email"
         placeholderTextColor="#ddd"
@@ -61,8 +68,6 @@ const Login = () => {
         }}
       />
 
-      {/* Password */}
-      <Text style={{ color: "#FFF", fontSize: 16, marginBottom: 6 }}>Password</Text>
       <TextInput
         placeholder="Enter your password"
         placeholderTextColor="#ddd"
@@ -79,7 +84,6 @@ const Login = () => {
         }}
       />
 
-      {/* Login Button */}
       <TouchableOpacity
         onPress={handleLogin}
         style={{
@@ -93,24 +97,13 @@ const Login = () => {
         <Text style={{ fontSize: 18, fontWeight: "bold", color: "#FF0000" }}>Login</Text>
       </TouchableOpacity>
 
-      {/* Signup Link */}
-      <Text style={{
-        color: "#FFF",
-        fontSize: 16,
-        textAlign: "center",
-        marginBottom: 10,
-      }}>
+      <Text style={{ color: "#FFF", fontSize: 16, textAlign: "center", marginBottom: 10 }}>
         Don’t have an account?{" "}
-        <Link href="/register" style={{
-          fontWeight: "bold",
-          textDecorationLine: "underline",
-          color: "#FFF",
-        }}>
+        <Link href="/register" style={{ fontWeight: "bold", textDecorationLine: "underline", color: "#FFF" }}>
           Sign up
         </Link>
       </Text>
 
-      {/* Forgot Password Link */}
       <Text style={{
         color: "#FFF",
         fontSize: 16,

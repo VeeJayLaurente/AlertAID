@@ -1,12 +1,30 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {View,Text,StyleSheet,TouchableOpacity,Switch,Image,Appearance,} from "react-native";
 import { useTranslation } from "react-i18next";
 import { useApp } from '../../UI/AppContext'
 import {Link} from 'expo-router'
+import { getAuth } from 'firebase/auth';
+import { getFirestore, doc, getDoc } from 'firebase/firestore';
+import { app } from '../../firebase/firebaseConfig'; 
 
 const Settings = () => {
   const { t } = useTranslation();
   const { isDarkMode, toggleTheme, language, toggleLanguage } = useApp();
+
+const [username, setUsername] = useState('');
+
+useEffect(() => {
+  const fetchUserName = async () => {
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+    const user = auth.currentUser;
+    if (user) {
+      const docSnap = await getDoc(doc(db, 'users', user.uid));
+      if (docSnap.exists()) setUsername(docSnap.data().username);
+    }
+  };
+  fetchUserName();
+}, []);
 
   return (
     <View
@@ -25,7 +43,7 @@ const Settings = () => {
           />
           </Link>
         </TouchableOpacity>
-        <Text style={styles.headerText}>{t("greeting")}</Text>
+        <Text style={styles.headerText}>Hello, {username || 'Guest'}</Text>
       </View>
 
       <View style={styles.infoCard}>

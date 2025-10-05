@@ -14,6 +14,11 @@ const _layout = () => {
       options = {{headerShown: false}}
       />
 
+      <Stack.Screen 
+      name="[id]" 
+      options = {{headerShown: false}}
+      />
+
     </Stack>
   )
 }
