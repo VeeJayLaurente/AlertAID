@@ -35,4 +35,4 @@ AlertAID Mobile App.
 <img src="assets/images/Sign In.png">  
 
 # Home Screen
-<img src="assets/images/Dashboard.png">  
+<img src="assets/images/Dashboard.jfif">  
