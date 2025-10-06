@@ -1,5 +1,5 @@
 # AlertAID
-AlertAID Mobile App - Emergency Response and Disaster Management Solution
+AlertAID Mobile App - Your Pocket Assistant in Emergency Preparedness
 
 # Features
 * Emergency Hotline Directory – Quick access to Toledo City emergency hotlines (police, fire, medical, disaster response).
