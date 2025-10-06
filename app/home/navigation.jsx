@@ -23,8 +23,6 @@ import { doc, getDoc } from "firebase/firestore";
 const { width } = Dimensions.get('window');
 
 const NavigationScreen = () => {
-  const API_URL = "https://alertaid-ijwk0dj7n-veejs-projects-76c2a3f2.vercel.app/api/getAlerts";
-  const POLL_INTERVAL_MS = 60000;
 
   const [location, setLocation] = useState(null);
   const [selectedPlace, setSelectedPlace] = useState(null);
@@ -39,6 +37,8 @@ const NavigationScreen = () => {
   const mapRef = useRef(null);
   const [weather, setWeather] = useState(null);
   const [routeCoords, setRouteCoords] = useState([]);
+  const [isOnline, setIsOnline] = useState(true);
+
 
   // ---- LANDMARKS ----
   const lguLandmarks = [
@@ -191,25 +191,33 @@ const NavigationScreen = () => {
 
   // --- Find Nearest Evacuation Center ---
   const findNearestEvacuation = () => {
-    if (!location) return;
-    let nearest = null;
-    let minDist = Infinity;
-    evacuationCenters.forEach((center) => {
-      const dist = Math.sqrt(
-        Math.pow(center.latitude - location.latitude, 2) +
-        Math.pow(center.longitude - location.longitude, 2)
-      );
-      if (dist < minDist) {
-        minDist = dist;
-        nearest = center;
-      }
-    });
-    if (nearest) {
-      getDirections(nearest);
-      Alert.alert("Nearest Evacuation Center", nearest.name);
+  if (!location) return;
+  
+  if (!isOnline) {
+    Alert.alert(
+      "No Internet Connection", 
+      "Please connect to the internet and refresh the app to use navigation features."
+    );
+    return;
+  }
+  
+  let nearest = null;
+  let minDist = Infinity;
+  evacuationCenters.forEach((center) => {
+    const dist = Math.sqrt(
+      Math.pow(center.latitude - location.latitude, 2) +
+      Math.pow(center.longitude - location.longitude, 2)
+    );
+    if (dist < minDist) {
+      minDist = dist;
+      nearest = center;
     }
-  };
-
+  });
+  if (nearest) {
+    getDirections(nearest);
+    Alert.alert("Nearest Evacuation Center", nearest.name);
+  }
+};
   // ---- fetch user profile once (username used for greeting) ----
   useEffect(() => {
     const fetchUserData = async () => {
@@ -308,16 +316,35 @@ const NavigationScreen = () => {
         {/* Refresh button */}
         <TouchableOpacity
           onPress={() => {
-            // manual fetch: quick way is to clear interval and restart fetch effect.
-            // Simpler: call API directly
             (async () => {
               try {
-                const res = await fetch(API_URL);
-                const json = await res.json();
-                const items = json.alerts ?? json.alerts ?? json;
-                setAlerts(items || []);
+                // Test internet connectivity
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
+                
+                const testConnection = await fetch('https://www.google.com', { 
+                  method: 'HEAD',
+                  signal: controller.signal 
+                });
+                clearTimeout(timeoutId);
+                
+                if (testConnection.ok) {
+                  setIsOnline(true);
+                  
+                  // User has internet - refresh weather data
+                  if (location) {
+                    fetchWeather(location.latitude, location.longitude);
+                  }
+                  
+                  Alert.alert("Success", "Weather data refreshed successfully!");
+                } else {
+                  setIsOnline(false);
+                  Alert.alert("No Internet", "Please check your internet connection and try again.");
+                }
               } catch (err) {
-                Alert.alert("Error", "Failed to refresh alerts");
+                setIsOnline(false);
+                console.error("Refresh error:", err);
+                Alert.alert("No Internet", "Unable to refresh data. Please check your internet connection.");
               }
             })();
           }}

@@ -7,6 +7,8 @@ import {
   StyleSheet,
   ScrollView,
   Linking,
+  RefreshControl,
+  ActivityIndicator,
 } from "react-native";
 import { Link } from "expo-router";
 import { useTranslation } from "react-i18next";
@@ -14,36 +16,71 @@ import { useApp } from "../../UI/AppContext";
 
 const HomeScreen = () => {
   const [alerts, setAlerts] = useState([]);
+  const [refreshing, setRefreshing] = useState(false);
+  const [isOnline, setIsOnline] = useState(true);
   const { t } = useTranslation();
   const { isDarkMode } = useApp();
 
   // ✅ Fetch latest alerts
-  useEffect(() => {
-    const fetchAlerts = async () => {
-      try {
-        const resp = await fetch(
-          "https://alertaid-691eebu0m-veejs-projects-76c2a3f2.vercel.app/api/getAlerts"
-        );
-        const text = await resp.text();
-        const json = JSON.parse(text);
-        if (json.ok && Array.isArray(json.alerts)) {
-          setAlerts(json.alerts);
-        } else {
-          setAlerts([]);
-        }
-      } catch (err) {
-        console.error("Failed to fetch alerts from API", err);
+  const fetchAlerts = async () => {
+    try {
+      const resp = await fetch(
+        "https://alertaid-691eebu0m-veejs-projects-76c2a3f2.vercel.app/api/getAlerts"
+      );
+      const text = await resp.text();
+      const json = JSON.parse(text);
+      if (json.ok && Array.isArray(json.alerts)) {
+        setAlerts(json.alerts);
+      } else {
         setAlerts([]);
       }
-    };
+      return true; // Success
+    } catch (err) {
+      console.error("Failed to fetch alerts from API", err);
+      setAlerts([]);
+      return false; // Failure
+    }
+  };
+
+  // ✅ Initial fetch on component mount
+  useEffect(() => {
     fetchAlerts();
   }, []);
+
+  // ✅ Pull to refresh handler
+  const onRefresh = async () => {
+    setRefreshing(true);
+    
+    try {
+      // Test internet connectivity first
+      const connectivityTest = await fetch('https://www.google.com', { 
+        method: 'HEAD',
+        timeout: 5000 
+      }).catch(() => null);
+      
+      if (connectivityTest && connectivityTest.ok) {
+        setIsOnline(true);
+        // User has internet - fetch fresh alerts
+        const success = await fetchAlerts();
+        if (!success) {
+          setIsOnline(false);
+        }
+      } else {
+        setIsOnline(false);
+      }
+    } catch (error) {
+      console.error("Connectivity test failed:", error);
+      setIsOnline(false);
+    } finally {
+      setRefreshing(false);
+    }
+  };
 
   // ✅ Define Safety Articles with topic IDs
   const safetyTopics = [
     { id: "earthquake", label: "Earthquake", emoji: "🌋", color: "#5b3b28" },
     { id: "fire", label: "Fire Safety", emoji: "🔥", color: "#E74C3C" },
-    { id: "flooding", label: "Flooding", emoji: "🚣‍♀️", color: "#2980B9" },
+    { id: "flood", label: "Flooding", emoji: "🚣‍♀️", color: "#2980B9" },
     { id: "elniño", label: "El Niño", emoji: "🏜️", color: "#E67E22" },
     { id: "covid", label: "COVID-19", emoji: "🦠", color: "#16A085" },
     { id: "laniña", label: "La Niña", emoji: "🌧️", color: "#3498DB" },
@@ -79,17 +116,41 @@ const HomeScreen = () => {
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: 100 }}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            colors={["#FF0000"]} // Red color for the refresh indicator
+            tintColor="#FF0000" // iOS specific
+            title="Checking for updates..." // iOS specific
+            titleColor="#666" // iOS specific
+          />
+        }
       >
+        {/* Internet Status Indicator */}
+        {!isOnline && (
+          <View style={styles.offlineBanner}>
+            <Text style={styles.offlineText}>
+              📶 You're offline. Pull down to refresh when connected.
+            </Text>
+          </View>
+        )}
+
         {/* 🚨 Alerts Section */}
         <View style={styles.alertsContainer}>
-          <Text
-            style={[
-              styles.sectionTitle,
-              { color: isDarkMode ? "#FFF" : "#000" },
-            ]}
-          >
-            🚨 Latest Alerts & Updates
-          </Text>
+          <View style={styles.sectionHeader}>
+            <Text
+              style={[
+                styles.sectionTitle,
+                { color: isDarkMode ? "#FFF" : "#000" },
+              ]}
+            >
+              🚨 Latest Alerts & Updates
+            </Text>
+            {refreshing && (
+              <ActivityIndicator size="small" color="#FF0000" />
+            )}
+          </View>
 
           <ScrollView
             horizontal
@@ -119,9 +180,16 @@ const HomeScreen = () => {
                 </View>
               ))
             ) : (
-              <Text style={{ color: isDarkMode ? "#FFF" : "#000" }}>
-                No alerts available
-              </Text>
+              <View style={styles.noAlertsContainer}>
+                <Text style={[styles.noAlertsText, { color: isDarkMode ? "#FFF" : "#000" }]}>
+                  {isOnline ? "No alerts available" : "Connect to internet for alerts"}
+                </Text>
+                {!isOnline && (
+                  <Text style={styles.offlineHint}>
+                    Pull down to refresh when online
+                  </Text>
+                )}
+              </View>
             )}
           </ScrollView>
         </View>
@@ -178,6 +246,26 @@ const styles = StyleSheet.create({
     height: 30,
     tintColor: "#FF0000",
   },
+  // Refresh and connectivity styles
+  offlineBanner: {
+    backgroundColor: "#FFF3CD",
+    padding: 12,
+    borderRadius: 8,
+    marginBottom: 16,
+    borderLeftWidth: 4,
+    borderLeftColor: "#FFC107",
+  },
+  offlineText: {
+    color: "#856404",
+    fontSize: 14,
+    textAlign: "center",
+  },
+  sectionHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 12,
+  },
   alertsContainer: {
     marginBottom: 30,
   },
@@ -217,6 +305,21 @@ const styles = StyleSheet.create({
     color: "#FFF",
     fontSize: 12,
     fontWeight: "bold",
+  },
+  noAlertsContainer: {
+    padding: 20,
+    alignItems: "center",
+  },
+  noAlertsText: {
+    fontSize: 16,
+    textAlign: "center",
+    marginBottom: 8,
+  },
+  offlineHint: {
+    fontSize: 12,
+    color: "#666",
+    textAlign: "center",
+    fontStyle: "italic",
   },
   sectionTitle: {
     fontSize: 18,

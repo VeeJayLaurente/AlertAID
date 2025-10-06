@@ -4,16 +4,21 @@ import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
 
 const hotlines = [
-  { id: 1, label: 'CDRRMO', number: '0956-817-4215', icon: require('../../assets/images/Security.png') },
-  { id: 2, label: 'PNP Toledo City', number: '0915-642-6842', icon: require('../../assets/images/Police.png') },
-  { id: 3, label: 'Toledo Hospital', number: '+9978453621', icon: require('../../assets/images/Cross.png') },
-  { id: 4, label: 'BFP Toledo City', number: '0966-216-5466', icon: require('../../assets/images/BFP.png') },
-  { id: 5, label: 'Toledo City Hall', number: '+9932183443', icon: require('../../assets/images/City Hall.png') },
-  { id: 6, label: 'Philippine Coast Guard', number: '0906-536-4925', icon: require('../../assets/images/Cross.png') },
-  { id: 7, label: 'Toledo City Health', number: '+9923417832', icon: require('../../assets/images/City Health.png') },
-  { id: 8, label: 'Cebeco III', number: '0917-624-4406', icon: require('../../assets/images/Cebeco.png') },
-  { id: 9, label: 'CENRO', number: '+9943217788', icon: require('../../assets/images/Cenro.png') },
-  { id: 10, label: 'DSWD', number: '+9932145789', icon: require('../../assets/images/DSWD.png') },
+  { id: 1, label: 'CDRRMO', number: '09568174215', icon: require('../../assets/images/Security.png') },
+  { id: 2, label: 'CDRRMO #2', number: '09610546250', icon: require('../../assets/images/Security.png') },
+  { id: 3, label: 'PNP Toledo City', number: '09664352435', icon: require('../../assets/images/Police.png') },
+  { id: 4, label: 'Toledo Hospital', number: '09453592755', icon: require('../../assets/images/Cross.png') },
+  { id: 5, label: 'BFP Toledo City', number: '09662165466', icon: require('../../assets/images/BFP.png') },
+  { id: 6, label: 'City Mayor Office', number: '09275818245', icon: require('../../assets/images/City Hall.png') },
+  { id: 7, label: 'Philippine Coast Guard', number: '09065364925', icon: require('../../assets/images/Cross.png') },
+  { id: 8, label: 'Toledo City Health', number: '09531774692', icon: require('../../assets/images/City Health.png') },
+  { id: 9, label: 'Cebeco III', number: '09176244406', icon: require('../../assets/images/Cebeco.png') },
+  { id: 10, label: 'Public Information Office', number: '09567186174', icon: require('../../assets/images/PIO.png') },
+  { id: 11, label: 'DSWD', number: '09173114415', icon: require('../../assets/images/DSWD.png') },
+  { id: 12, label: 'Civil Security Unit', number: '09353449759', icon: require('../../assets/images/Swat.png') },
+  { id: 13, label: 'Toledo City Water District', number: '09177099504', icon: require('../../assets/images/Management.png') },
+  { id: 14, label: 'City Engineer Office', number: '09174941245', icon: require('../../assets/images/Language.png') },
+  { id: 15, label: 'City Engineer Office #2', number: '09177001062', icon: require('../../assets/images/Language.png') },
 ];
 
 const InformationScreen = () => {
