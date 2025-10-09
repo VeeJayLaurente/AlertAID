@@ -33,3 +33,8 @@ yarn-error.*
 
 # typescript
 *.tsbuildinfo
+
+# Prevent Firebase config and API keys from being exposed
+app.json
+firebase/firebaseConfig.js
+firebase/
