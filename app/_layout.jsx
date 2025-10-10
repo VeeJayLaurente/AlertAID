@@ -6,6 +6,8 @@ import { useFonts} from 'expo-font'
 import { useEffect } from 'react'
 import { SplashScreen } from 'expo-router'
 import { AppProvider } from "../UI/AppContext";
+import { BackHandler } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -19,6 +21,16 @@ const MainLayout = () => {
      "Inter-Regular": require("../assets/fonts/Inter-Regular.ttf"),
      "Inter-Bold": require("../assets/fonts/Inter-Bold.ttf")
   });
+
+    useEffect(() => {
+    const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
+      // This will be overridden by individual screen handlers
+      return false; // Let individual screens handle it
+    });
+
+    return () => backHandler.remove();
+  }, []);
+
   
   useEffect(() => {
     if (error) throw error;
@@ -40,35 +52,35 @@ const MainLayout = () => {
     <Stack>
 
       <Stack.Screen name="index" options={{
-        headerShown:false
+        headerShown:false , title: 'Home'
       }}/>
 
       <Stack.Screen name="welcomescreen" options={{
-              headerShown:false
+              headerShown:false , title: 'Welcome'
             }}/>
 
       <Stack.Screen name="welcomescreen2" options={{
-              headerShown:false
+              headerShown:false , title: 'Welcome2'
             }}/>
 
       <Stack.Screen name="login" options={{
-                    headerShown:false
+                    headerShown:false , title: 'Login'
                   }}/>
 
       <Stack.Screen name="register" options={{
-                    headerShown:false
+                    headerShown:false , title: 'Register'
                   }}/>
 
       <Stack.Screen name="forgotpassword" options={{
-                    headerShown:false
+                    headerShown:false , title: 'ForgotPassword'
                   }}/>
 
       <Stack.Screen name="home" options={{
-                    headerShown:false
+                    headerShown:false 
                   }}/>
 
       <Stack.Screen name="screens" options={{
-                    headerShown:false
+                    headerShown:false 
                   }}/>
 
     </Stack>

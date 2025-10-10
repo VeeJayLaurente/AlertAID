@@ -2,6 +2,7 @@ import { View, Text, TouchableOpacity, StyleSheet, Image, Alert, Linking, Scroll
 import * as Clipboard from 'expo-clipboard';
 import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
+import { useBackHandler } from '../utility/useBackHandler';
 
 const hotlines = [
   { id: 1, label: 'CDRRMO', number: '09568174215', icon: require('../../assets/images/Security.png') },
@@ -38,6 +39,8 @@ const InformationScreen = () => {
     setBookmarked((prev) => ({ ...prev, [id]: !prev[id] }));
   };
 
+  useBackHandler();
+
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer}>
     <View style={styles.container}>
@@ -46,7 +49,7 @@ const InformationScreen = () => {
         <TouchableOpacity onPress={() => router.back()}>
           <Image source={require('../../assets/images/Back Arrow.png')} style={styles.backIcon} />
         </TouchableOpacity>
-        <Image source={require('../../assets/images/Settings.png')} resizeMode="contain" style={styles.settingsIcon} />
+        <Image source={require('../../assets/images/Logo.png')} resizeMode="contain" style={styles.settingsIcon} />
       </View>
 
       {/* Hotline Card */}

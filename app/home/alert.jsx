@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import { useAudioPlayer } from 'expo-audio';
 import { Link } from 'expo-router';
+import { useBackHandler } from '../utility/useBackHandler';
 
 const audioSource = require('../../assets/sounds/alert.mp3');
 
@@ -20,6 +21,8 @@ export default function AlertScreen() {
   const [refreshing, setRefreshing] = useState(false);
   const [audioKey, setAudioKey] = useState(0);
   const buttonScale = useRef(new Animated.Value(1)).current;
+
+  useBackHandler();
 
   const animateButton = () => {
     Animated.sequence([

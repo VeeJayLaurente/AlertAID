@@ -19,6 +19,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { Link } from 'expo-router';
 import { auth, db } from "../../firebase/firebaseConfig";
 import { doc, getDoc } from "firebase/firestore";
+import { useBackHandler } from '../utility/useBackHandler';
 
 const { width } = Dimensions.get('window');
 
@@ -38,6 +39,8 @@ const NavigationScreen = () => {
   const [weather, setWeather] = useState(null);
   const [routeCoords, setRouteCoords] = useState([]);
   const [isOnline, setIsOnline] = useState(true);
+
+  useBackHandler();
 
 
   // ---- LANDMARKS ----

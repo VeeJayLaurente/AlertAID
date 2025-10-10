@@ -13,6 +13,7 @@ const Settings = () => {
 
 const [username, setUsername] = useState('');
 
+
 useEffect(() => {
   const fetchUserName = async () => {
     const auth = getAuth(app);
@@ -25,6 +26,8 @@ useEffect(() => {
   };
   fetchUserName();
 }, []);
+
+
 
   return (
     <View

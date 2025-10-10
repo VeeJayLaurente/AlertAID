@@ -4,6 +4,7 @@ import { useRouter, Link } from 'expo-router';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
 import { app } from '../../firebase/firebaseConfig';
+import { useBackHandler } from '../utility/useBackHandler';
 
 const ProfileScreen = () => {
   const router = useRouter();
@@ -12,6 +13,8 @@ const ProfileScreen = () => {
 
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
+  
+  useBackHandler();
 
   useEffect(() => {
     const currentUser = auth.currentUser;

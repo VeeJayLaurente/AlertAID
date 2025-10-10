@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import { useRouter, useLocalSearchParams } from "expo-router";
 
+
 const { width } = Dimensions.get("window");
 
 function normalizeKey(s) {
