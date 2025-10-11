@@ -109,7 +109,7 @@ const RegisterScreen = () => {
 
       {/* Username */}
       <TextInput
-        placeholder="Username"
+        placeholder="Set your Username"
         placeholderTextColor="#FFF"
         value={username}
         onChangeText={setUsername}
